@@ -1,0 +1,11 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    tmpDir: build/phpstan
+    ignoreErrors:
+        # Larastan cannot resolve view namespaces registered with loadViewsFrom().
+        -
+            identifier: argument.type
+            message: '#view-string\|null, string given#'
+            path: src/NetdataTileComponent.php

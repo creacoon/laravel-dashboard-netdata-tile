@@ -1,0 +1,64 @@
+{
+    "name": "creacoon/laravel-dashboard-netdata-tile",
+    "description": "Netdata tile for spatie/laravel-dashboard showing the status of every node streaming to a Netdata parent",
+    "keywords": [
+        "creacoon",
+        "laravel",
+        "dashboard",
+        "netdata"
+    ],
+    "homepage": "https://github.com/creacoon/laravel-dashboard-netdata-tile",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Coonen",
+            "email": "tom@creacoon.nl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "livewire/livewire": "^4.0",
+        "spatie/laravel-dashboard": "^4.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "phpstan/extension-installer": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Creacoon\\NetdataTile\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Creacoon\\NetdataTile\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/pest"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Creacoon\\NetdataTile\\NetdataTileServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

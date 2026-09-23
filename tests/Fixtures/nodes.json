@@ -1,0 +1,54 @@
+{
+    "api": 2,
+    "nodes": [
+        {
+            "mg": "9a0d7587-07b0-4759-89ca-66ab17d42faa",
+            "nm": "parent",
+            "ni": 0,
+            "v": "v2.11.1",
+            "labels": { "_is_parent": "true" },
+            "state": "reachable",
+            "health": {
+                "status": "online",
+                "alerts": { "critical": 0, "warning": 2, "clear": 186, "undefined": 33, "uninitialized": 1 }
+            }
+        },
+        {
+            "mg": "1b2c3d4e-0000-4000-8000-000000000001",
+            "nm": "web10",
+            "ni": 1,
+            "v": "v2.11.1",
+            "labels": { "_is_parent": "false" },
+            "state": "reachable",
+            "health": {
+                "status": "online",
+                "alerts": { "critical": 1, "warning": 1, "clear": 120, "undefined": 12, "uninitialized": 0 }
+            }
+        },
+        {
+            "mg": "1b2c3d4e-0000-4000-8000-000000000002",
+            "nm": "old-node",
+            "ni": 2,
+            "v": "v2.10.0",
+            "labels": { "_is_parent": "false" },
+            "state": "stale",
+            "health": {
+                "status": "disabled",
+                "alerts": { "critical": 0, "warning": 0, "clear": 0, "undefined": 0, "uninitialized": 0 }
+            }
+        },
+        {
+            "mg": "1b2c3d4e-0000-4000-8000-000000000003",
+            "nm": "web2",
+            "ni": 3,
+            "v": "v2.11.1",
+            "labels": { "_is_parent": "false" },
+            "state": "reachable",
+            "health": {
+                "status": "online",
+                "alerts": { "critical": 0, "warning": 0, "clear": 98, "undefined": 8, "uninitialized": 0 }
+            }
+        }
+    ],
+    "timings": { "prep_ms": 0.01, "query_ms": 0.2, "output_ms": 0.01, "total_ms": 0.22, "cloud_ms": 0.22 }
+}
