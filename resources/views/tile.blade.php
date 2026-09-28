@@ -9,9 +9,6 @@
             grid-auto-rows: calc(var(--hexagon-size, 0px) * 0.866 + var(--hexagon-gap));
             padding-bottom: calc(var(--hexagon-size, 0px) * 0.2887 - var(--hexagon-gap));
             --hexagon-gap: 4px;
-        }
-
-        .netdata-honeycomb:not([data-ready]) {
             visibility: hidden;
         }
 
@@ -31,16 +28,11 @@
     </style>
 
     <div class="h-full flex flex-col">
-        <div class="flex items-center justify-between mb-2">
-            <div class="font-medium text-dimmed text-sm uppercase tracking-wide">
-                Netdata
+        @if($nodes->isNotEmpty())
+            <div class="flex justify-end mb-2 text-dimmed text-sm tabular-nums">
+                {{ $onlineCount }}/{{ $nodes->count() }} online
             </div>
-            @if($nodes->isNotEmpty())
-                <div class="text-dimmed text-sm tabular-nums">
-                    {{ $onlineCount }}/{{ $nodes->count() }} online
-                </div>
-            @endif
-        </div>
+        @endif
 
         @if($nodes->isEmpty())
             <div class="flex grow items-center justify-center text-dimmed text-sm">
@@ -54,7 +46,6 @@
                     gap: 4,
 
                     init() {
-                        this.$refs.honeycomb.id = this.$id('netdata-honeycomb');
                         new ResizeObserver(() => this.layout()).observe(this.$el);
                         new MutationObserver(() => this.layout()).observe(this.$refs.honeycomb, { childList: true });
                         this.layout();
@@ -94,16 +85,15 @@
                             rules += `${hexagon}:nth-child(${pairLength}n + ${best.columns + column + 1}) { grid-column-start: ${column * 2 + 2}; }`;
                         }
 
+                        rules += `#${honeycomb.id} { --hexagon-size: ${Math.floor(best.size)}px; --hexagon-gap: ${this.gap}px; --half-columns: ${halfColumns}; visibility: visible; }`;
+
                         this.$refs.layout.textContent = rules;
-                        honeycomb.style.setProperty('--hexagon-size', `${Math.floor(best.size)}px`);
-                        honeycomb.style.setProperty('--hexagon-gap', `${this.gap}px`);
-                        honeycomb.style.setProperty('--half-columns', halfColumns);
-                        honeycomb.dataset.ready = '';
                     },
                 }"
             >
                 <style x-ref="layout" wire:ignore></style>
-                <div class="netdata-honeycomb" x-ref="honeycomb" wire:ignore.self>
+                {{-- Layout state lives in the wire:ignore style tag: Livewire's morph strips attributes set by JS from the honeycomb on every poll --}}
+                <div class="netdata-honeycomb" id="netdata-honeycomb-{{ $this->getId() }}" x-ref="honeycomb">
                     @foreach($nodes as $node)
                         @php($status = \Creacoon\NetdataTile\NodeStatus::from($node['status']))
                         <div class="netdata-hexagon {{ $status->backgroundClass() }} text-white" data-status="{{ $status->value }}">
